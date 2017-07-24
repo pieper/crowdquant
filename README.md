@@ -14,6 +14,9 @@ $ npm start
 ```
 
 ## DICOM Server
+
+(The version in this branch pull data from Amazon s3 directly)
+
 This exaple expects a server running on `http://localhost:4000` which provides a file named *mock.json*. This JSON will contain a list of DICOM URLs to be downloaded by this viewer. Example below:
 ```
 {
