@@ -115,6 +115,13 @@
       </ul>
     </div>
 
+    <!-- for TCIA -->
+    <script type="text/javascript" src="https://rawgit.com/pieper/dcmjs/master/examples/js/jszip.min.js"></script>
+    <script type="text/javascript" src="https://rawgit.com/pieper/dcmjs/master/build/dcmjs.js"></script>
+    <script type="text/javascript" src="https://rawgit.com/pieper/dcmjs/master/examples/helpers/tcia.js"></script>
+    <script type="text/javascript" src="https://rawgit.com/pieper/dcmjs/master/examples/helpers/DICOMZero.js"></script>
+
+
     <!-- Dependencies -->
     <script type="text/javascript" src="./js/jquery.min.js"></script>
     <script type="text/javascript" src="./js/hammer.min.js"></script>
@@ -134,7 +141,20 @@
     <script type="text/javascript" src="./src/viewer/tools.js"></script>
     <script type="text/javascript" src="./src/viewer/viewer.js"></script>
     <script type="text/javascript">
-      Login.init();
+
+      // Login.init();
+
+      //
+      // bypass login screen for now... and directly load data
+      //
+      var $loadingImg = $('.login-wrapper form button.submit img.loading');
+      var $loginWrapper = $('.login-wrapper');
+      $loadingImg.removeClass('invisible');
+      $loadingImg.addClass('invisible');
+      $loginWrapper.addClass('invisible');
+
+      Viewer.initViewer();
+
     </script>
   </body>
 </html>
