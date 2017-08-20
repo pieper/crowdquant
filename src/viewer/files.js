@@ -63,6 +63,33 @@ var Files = (function () {
       }
 
       Connector.getCase(handleCaseData);
+    },
+    getTCIACase: function (seriesUID, callback) {
+      var $overlay = $('.loading-overlay');
+      $overlay.addClass('loading');
+      $overlay.removeClass('invisible');
+
+      filesDownloaded = 0;
+
+      var dc0 = new DICOMZero();
+      var tcia = new TCIA();
+
+      tcia.images(seriesUID).then(arrayBuffer => {
+        dc0.extractFromZipArrayBuffer(arrayBuffer, function() {
+          dc0.datasets.sort(function(a,b) {
+            return (Number(a.InstanceNumber)-Number(b.InstanceNumber));
+          });
+          dc0.viewer = new Viewer(dc0.datasets);
+
+          cornerstone.registerImageLoader('dcmjs', dc0.viewer.dcmjsImageLoader.bind(dc0.viewer));
+          var imageIds = [];
+          for (let index = 0; index < this.datasets.length; index++) {
+            let imageId = 'dcmjs://'+index;
+            imageIds.push(imageId);
+          }
+          callback(null, imageIds);
+        });
+      });
     }
   };
 })();

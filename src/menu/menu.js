@@ -16,7 +16,7 @@ var Menu = (function () {
     },
     nextCase: function () {
       Menu.closeMenu();
-      Viewer.getNextCase();
+      CrowdViewer.getNextCase();
     },
     logout: function () {
       Menu.closeMenu();

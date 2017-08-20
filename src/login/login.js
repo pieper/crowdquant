@@ -21,7 +21,7 @@ var Login = (function () {
           $loadingImg.addClass('invisible');
           $loginWrapper.addClass('invisible');
 
-          Viewer.initViewer();
+          CrowdViewer.initViewer();
         }, 1000);
       });
     }

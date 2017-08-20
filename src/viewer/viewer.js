@@ -1,14 +1,14 @@
-var Viewer = (function () {
+var CrowdViewer = (function () {
   var $window = $(window);
   var $viewer = $('.viewer-wrapper');
   var $overlay = $('.loading-overlay');
   var $element;
 
   return {
-    getNextCase: function () {
+    getNextCase: function (seriesUID) {
       $overlay.removeClass('invisible').addClass('loading');
 
-      Files.getCaseImages(function (error, imagesIds) {
+      var handleCase = function (error, imagesIds) {
         if (error) {
           console.error(error);
 
@@ -23,9 +23,19 @@ var Viewer = (function () {
         cornerstone.loadImage(imagesIds[0]).then(function (image) {
           cornerstone.displayImage($element, image);
         });
-      });
+
+        $overlay.removeClass('loading').addClass('invisible');
+      }
+
+      if (seriesUID) {
+        console.log('getting ', seriesUID);
+        Files.getTCIACase(seriesUID, handleCase);
+      } else {
+        Files.getCaseImages(handleCase);
+      }
+
     },
-    initViewer: function () {
+    initViewer: function (seriesUID) {
       $element = $('#conerstoneViewport')[0];
 
       Menu.init();
@@ -36,7 +46,7 @@ var Viewer = (function () {
 
       cornerstone.enable($element);
 
-      Viewer.getNextCase();
+      CrowdViewer.getNextCase(seriesUID);
     }
   };
 })();

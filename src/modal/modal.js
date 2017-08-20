@@ -12,7 +12,7 @@ var Modal = (function () {
     nextCase: function () {
       Modal.hide();
 
-      Viewer.getNextCase();
+      CrowdViewer.getNextCase();
     },
     show: function () {
       $modal.addClass('show');
