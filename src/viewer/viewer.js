@@ -20,7 +20,9 @@ var CrowdViewer = (function () {
         Tools.initTools(imagesIds, $element);
         Commands.initCommands($element);
 
-        cornerstone.loadImage(imagesIds[0]).then(function (image) {
+        var middleImage = Math.floor(imagesIds.length/2);
+
+        cornerstone.loadImage(imagesIds[middleImage]).then(function (image) {
           cornerstone.displayImage($element, image);
         });
 
